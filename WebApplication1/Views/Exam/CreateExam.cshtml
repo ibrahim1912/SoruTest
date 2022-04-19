@@ -1,0 +1,409 @@
+﻿@{
+    ViewData["Title"] = "CreateExam";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+        <div class="x_title">
+            <h2>Create Exam <small></small></h2>
+            <ul class="nav navbar-right panel_toolbox">
+                <li>
+                    <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li>
+                            <a href="#">Settings 1</a>
+                        </li>
+                        <li>
+                            <a href="#">Settings 2</a>
+                        </li>
+                    </ul>
+                </li>
+
+            </ul>
+            <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+            <br>
+            <form id="demo-form2" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="">
+                <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
+                        Article<span class="required">*</span>
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <select onchange="selectedChanged()" name="Title" id="headers" class="form-control col-md-7 col-xs-12" required="required">
+                            <option value="" disabled selected>Choose</option>
+                            @for (int i = 0; i < 5; i++)
+                            {
+                                <option value="@(i+1)">@ViewBag.Basliklar[i]</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">
+                        Content <span class="required">*</span>
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12" style="width:49%;height:auto;border:0.5px solid;margin-left:8px">
+                        <p id="text" name="Content" class="" required>Please choose article</p>
+
+                    </div>
+                </div>
+                <div class="form-group question">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name"></label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input type="text" class="form-control has-feedback-left" id="inputSuccess2" name="Content" placeholder="Question 1" required>
+                        <span class="form-control-feedback left" aria-hidden="true">1</span>
+                    </div>
+                </div>
+                <div class="form-group choices">
+
+                    <div class="col-md-3 col-sm-3 col-xs-12 form-group has-feedback">
+                    </div>
+                    <div class="col-md-3 col-sm-3 col-xs-12 form-group has-feedback span">
+                        <input type="text" class="form-control has-feedback-left" id="inputSuccess2" required>
+                        <span class="form-control-feedback left form-control-feedback left" aria-hidden="true">A.)</span>
+                        <input type="hidden" value="A" />
+                    </div>
+                    <div class="col-md-3 col-sm-3 col-xs-12 form-group has-feedback span">
+                        <input type="text" class="form-control has-feedback-left" id="inputSuccess2" required>
+                        <span class=" form-control-feedback left" aria-hidden="true" value="B">B.)</span>
+                        <input type="hidden" value="B" />
+                    </div>
+                    <div class="col-md-3 col-sm-3 col-xs-12 form-group has-feedback"></div>
+                </div>
+                <div class="form-group choices">
+                    <div class="col-md-3 col-sm-3 col-xs-12 form-group has-feedback">
+                    </div>
+                    <div class="col-md-3 col-sm-3 col-xs-12 form-group has-feedback span">
+                        <input type="text" class="form-control has-feedback-left" id="inputSuccess2" required>
+                        <span class="form-control-feedback left " aria-hidden="true" value="C">C.)</span>
+                        <input type="hidden" value="C" />
+                    </div>
+                    <div class="col-md-3 col-sm-3 col-xs-12 form-group has-feedback span">
+                        <input type="text" class="form-control has-feedback-left" id="inputSuccess2" required>
+                        <span class=" form-control-feedback left" aria-hidden="true" value="D">D.)</span>
+                        <input type="hidden" value="D" />
+                    </div>
+                    <div class="col-md-3 col-sm-3 col-xs-12 form-group has-feedback"></div>
+                </div>
+                <div class="form-group answers">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name"></label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        @*<input type="text" class="form-control has-feedback-left" id="inputSuccess2" name="QuestionContent">*@
+                        <select class="form-control has-feedback-left" required>
+                            <option selected>Chooise Correct Answer</option>
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="C">C</option>
+                            <option value="D">D</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group question">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name"></label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input type="text" class="form-control has-feedback-left" id="inputSuccess2" name="Content" placeholder="Question 2" required>
+                        <span class="form-control-feedback left" aria-hidden="true">2</span>
+                    </div>
+                </div>
+                <div class="form-group choices">
+                    <div class="col-md-3 col-sm-3 col-xs-12 form-group has-feedback">
+                    </div>
+                    <div class="col-md-3 col-sm-3 col-xs-12 form-group has-feedback">
+                        <input type="text" class="form-control has-feedback-left" id="inputSuccess2" name="Content" required>
+                        <span class="form-control-feedback left form-control-feedback left" aria-hidden="true">A.)</span>
+                        <input type="hidden" value="A" />
+                    </div>
+                    <div class="col-md-3 col-sm-3 col-xs-12 form-group has-feedback">
+                        <input type="text" class="form-control has-feedback-left" id="inputSuccess2" required>
+                        <span class=" form-control-feedback left" aria-hidden="true">B.)</span>
+                        <input type="hidden" value="B" />
+                    </div>
+                    <div class="col-md-3 col-sm-3 col-xs-12 form-group has-feedback"></div>
+                </div>
+                <div class="form-group choices">
+                    <div class="col-md-3 col-sm-3 col-xs-12 form-group has-feedback">
+                    </div>
+                    <div class="col-md-3 col-sm-3 col-xs-12 form-group has-feedback">
+                        <input type="text" class="form-control has-feedback-left" id="inputSuccess2" required>
+                        <span class="form-control-feedback left form-control-feedback left" aria-hidden="true">C.)</span>
+                        <input type="hidden" value="C" />
+                    </div>
+                    <div class="col-md-3 col-sm-3 col-xs-12 form-group has-feedback">
+                        <input type="text" class="form-control has-feedback-left" id="inputSuccess2" required>
+                        <span class=" form-control-feedback left" aria-hidden="true">D.)</span>
+                        <input type="hidden" value="D" />
+                    </div>
+                    <div class="col-md-3 col-sm-3 col-xs-12 form-group has-feedback"></div>
+                </div>
+                <div class="form-group answers">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name"></label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <select class="form-control has-feedback-left" required>
+                            <option selected>Chooise Correct Answer</option>
+                            <option>A</option>
+                            <option>B</option>
+                            <option>C</option>
+                            <option>D</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group question">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name"></label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input type="text" class="form-control has-feedback-left" id="inputSuccess2" name="Content" placeholder="Question 3" required>
+                        <span class="form-control-feedback left" aria-hidden="true">3</span>
+                    </div>
+                </div>
+                <div class="form-group choices">
+                    <div class="col-md-3 col-sm-3 col-xs-12 form-group has-feedback">
+                    </div>
+                    <div class="col-md-3 col-sm-3 col-xs-12 form-group has-feedback">
+                        <input type="text" class="form-control has-feedback-left" id="inputSuccess2" required>
+                        <span class="form-control-feedback left form-control-feedback left" aria-hidden="true">A.)</span>
+                        <input type="hidden" value="A" />
+                    </div>
+                    <div class="col-md-3 col-sm-3 col-xs-12 form-group has-feedback">
+                        <input type="text" class="form-control has-feedback-left" id="inputSuccess2" required>
+                        <span class=" form-control-feedback left" aria-hidden="true">B.)</span>
+                        <input type="hidden" value="B" />
+                    </div>
+                    <div class="col-md-3 col-sm-3 col-xs-12 form-group has-feedback"></div>
+                </div>
+                <div class="form-group choices">
+                    <div class="col-md-3 col-sm-3 col-xs-12 form-group has-feedback">
+                    </div>
+                    <div class="col-md-3 col-sm-3 col-xs-12 form-group has-feedback">
+                        <input type="text" class="form-control has-feedback-left" id="inputSuccess2" name="Content" required>
+                        <span class="form-control-feedback left form-control-feedback left" aria-hidden="true">C.)</span>
+                        <input type="hidden" value="C" />
+                    </div>
+                    <div class="col-md-3 col-sm-3 col-xs-12 form-group has-feedback">
+                        <input type="text" class="form-control has-feedback-left" id="inputSuccess2" name="Content" required>
+                        <span class=" form-control-feedback left" aria-hidden="true">D.)</span>
+                        <input type="hidden" value="D" />
+                    </div>
+                    <div class="col-md-3 col-sm-3 col-xs-12 form-group has-feedback"></div>
+                </div>
+                <div class="form-group answers">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name"></label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <select class="form-control has-feedback-left" required>
+                            <option selected>Chooise Correct Answer</option>
+                            <option>A</option>
+                            <option>B</option>
+                            <option>C</option>
+                            <option>D</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group question">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name"></label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input type="text" class="form-control has-feedback-left" id="inputSuccess2" name="Content" placeholder="Question 4" required>
+                        <span class="form-control-feedback left" aria-hidden="true">4</span>
+                    </div>
+                </div>
+                <div class="form-group choices">
+                    <div class="col-md-3 col-sm-3 col-xs-12 form-group has-feedback">
+                    </div>
+                    <div class="col-md-3 col-sm-3 col-xs-12 form-group has-feedback">
+                        <input type="text" class="form-control has-feedback-left" id="inputSuccess2" required>
+                        <span class="form-control-feedback left form-control-feedback left" aria-hidden="true">A.)</span>
+                        <input type="hidden" value="A" />
+                    </div>
+                    <div class="col-md-3 col-sm-3 col-xs-12 form-group has-feedback">
+                        <input type="text" class="form-control has-feedback-left" id="inputSuccess2" name="Content" required>
+                        <span class=" form-control-feedback left" aria-hidden="true" name="Name">B.)</span>
+                        <input type="hidden" value="B" />
+                    </div>
+                    <div class="col-md-3 col-sm-3 col-xs-12 form-group has-feedback"></div>
+                </div>
+                <div class="form-group choices">
+                    <div class="col-md-3 col-sm-3 col-xs-12 form-group has-feedback">
+                    </div>
+                    <div class="col-md-3 col-sm-3 col-xs-12 form-group has-feedback">
+                        <input type="text" class="form-control has-feedback-left" id="inputSuccess2" required>
+                        <span class="form-control-feedback left form-control-feedback left" aria-hidden="true">C.)</span>
+                        <input type="hidden" value="C" />
+                    </div>
+                    <div class="col-md-3 col-sm-3 col-xs-12 form-group has-feedback">
+                        <input type="text" class="form-control has-feedback-left" id="inputSuccess2" required>
+                        <span class=" form-control-feedback left" aria-hidden="true">D.)</span>
+                        <input type="hidden" value="D" />
+                    </div>
+                    <div class="col-md-3 col-sm-3 col-xs-12 form-group has-feedback"></div>
+                </div>
+                <div class="form-group answers">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name"></label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        @*<input type="text" class="form-control has-feedback-left" id="inputSuccess2" name="QuestionContent">*@
+                        <select class="form-control has-feedback-left" required>
+                            <option selected>Chooise Correct Answer</option>
+                            <option>A</option>
+                            <option>B</option>
+                            <option>C</option>
+                            <option>D</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                        <button class="btn btn-primary" type="button">Cancel</button>
+                        <button class="btn btn-primary" type="reset">Reset</button>
+                        <button type="submit" class="btn btn-success" onclick="save()">Submit</button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function save() {
+        //alert("girdi");
+        var form = document.getElementById("demo-form2");
+        var headerSelect = document.getElementById("headers");
+        header = getSelectedOptionText(headerSelect);   //seçilen makale başlığı al
+        //alert(header);
+        var text = document.getElementById("text").innerHTML; //Metini al
+        //alert(text);
+        var choiceElements = [];
+        choiceElements = form.getElementsByClassName("choices"); //Bütün Şıkları Al
+        //alert(choiceElements);
+
+        var questionElements = [];
+        questionElements = form.getElementsByClassName("question") //Bütün Soruları Al
+        //alert(questionElements);
+
+        var correctAnswerElements = [];
+        correctAnswerElements = form.getElementsByClassName("answers"); //Bütün Doğru Cevapları Al
+        //alert(correctAnswerElements);
+
+        var correctAnswers = [];
+        for (let div of correctAnswerElements) {
+            var answers = div.getElementsByTagName("select")[0];
+            //alert(answers);
+            correctAnswers.push(getSelectedOptionText(answers));
+        }
+
+        console.log(choiceElements);
+        console.log(header);
+        console.log(text);
+        console.log(questionElements);
+
+        var choices = [];
+        for (let div of choiceElements) {
+            for (let input of div.getElementsByTagName("input")) {
+                choices.push(input.value)
+            }
+        }
+
+
+        var questiones = [];
+        for (let div of questionElements) {
+            for (let input of div.getElementsByTagName("input")) {
+                questiones.push(input.value)
+            }
+        }
+        console.log(choices);
+        console.log(questiones);
+        console.log(correctAnswers);
+
+
+
+
+        $.ajax({
+            type: 'POST',
+            url: "/Exam/CreateExam",
+            dataType: 'json',
+            data: {
+                questiones: questiones,
+                choices: choices,
+                header: header,
+                text: text,
+                correctAnswers: correctAnswers,
+                //cAnswer: cAnswer
+            },
+            success: function (data) {
+                if (data.result == 1)
+                    bootbox.alert(data.message);
+                else
+                    bootbox.alert("Onaylama Başarısız!");
+
+            },
+
+            error: function () {
+                //alert("burası error");
+                bootbox.alert("Error.");
+            }
+
+        });
+
+
+
+
+
+        function getSelectedOptionText(selectItem) {
+            var options = selectItem.getElementsByTagName("option");
+            selectedOptionText = options[selectItem.selectedIndex].innerHTML;
+            return selectedOptionText;
+        }
+
+    }
+
+
+
+
+    function selectedChanged() {
+        var header = document.getElementById("headers").value;
+        var text = document.getElementById("text");
+        //alert(header);
+
+        
+        switch (header) {
+            case "1":
+                text.innerHTML = replaceAll("@ViewBag.Metinler[0]");
+                break;
+            case "2":
+                text.innerHTML = replaceAll("@ViewBag.Metinler[1]");
+                break;
+            case "3":
+                text.innerHTML = replaceAll("@ViewBag.Metinler[2]");
+                break;
+            case "4":
+                text.innerHTML = replaceAll("@ViewBag.Metinler[3]");
+                break;
+            case "5":
+                text.innerHTML = replaceAll("@ViewBag.Metinler[4]");
+                break;
+            default:
+                text.innerHTML = replaceAll("@ViewBag.Metinler[0]");
+                break;
+        }
+
+        function replaceAll(str) {
+            console.log(str);
+
+            str = str.replace(/&lt;/g, "<");
+            str = str.replace(/&gt;/g, ">");
+            str = str.replace(/&quot;/g, '"');
+            str = str.replace(/&amp;/g, "&");
+            console.log(str);
+            return str;
+        }
+
+
+    }
+</script>
+
+
+
+

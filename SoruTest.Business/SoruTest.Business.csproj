@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SoruTest.Core\SoruTest.Core.csproj" />
+    <ProjectReference Include="..\SoruTest.DataAccess\SoruTest.DataAccess.csproj" />
+    <ProjectReference Include="..\SoruTest.Entities\SoruTest.Entities.csproj" />
+  </ItemGroup>
+
+</Project>

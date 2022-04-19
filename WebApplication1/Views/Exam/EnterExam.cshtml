@@ -1,0 +1,179 @@
+﻿
+@{
+    ViewData["Title"] = "EnterExam";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@model WebApplication1.Models.EnterExamClass
+
+<div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+        <div class="x_title">
+            <h2>Enter Exam <small></small></h2>
+            <ul class="nav navbar-right panel_toolbox">
+                <li>
+                    <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li>
+                            <a href="#">Settings 1</a>
+                        </li>
+                        <li>
+                            <a href="#">Settings 2</a>
+                        </li>
+                    </ul>
+                </li>
+
+            </ul>
+            <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+            <br>
+            <form id="demo-form2" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="">
+
+                <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
+                        Article<span class="required">*</span>
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <select name="Title" id="headers" class="form-control col-md-7 col-xs-12" onchange="selectedChanged()" required="required">
+                            <option value="">@Model.exam.Title</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group ">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">
+                        Content <span class="required">*</span>
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12" style="width:49%;height:auto;border:0.5px solid;margin-left:8px">
+                        <p id="text" class="">@Model.exam.Content</p>
+                        <input type="hidden" value="@Model.exam.Id" id="ExamId" name="Id" />
+                    </div>
+                </div>
+                @{
+                    int a = 0;
+                    int b = 4;
+                    int c = 0;
+                    string[] stringArray = new string[4] { "A", "B", "C", "D" };
+                    int d = 0;
+
+                    foreach (var question in Model.questions)
+                    {
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name"></label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" class="form-control has-feedback-left" id="inputSuccess2" value="@question.Content" disabled>
+                                <span class="form-control-feedback left" aria-hidden="true">@(c + 1)</span>
+                            </div>
+                        </div>
+
+                        for (int i = a; i < b; i++)
+                        {
+                            <div class="form-group">
+                                <div class="col-md-3 col-sm-3 col-xs-12 form-group has-feedback">
+                                </div>
+
+                                <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                                    <input type="text" class="form-control has-feedback-left" id="inputSuccess2" value="@Model.options[i].Content" disabled>
+                                    <span class="form-control-feedback left form-control-feedback left" aria-hidden="true">@stringArray[d]</span>
+                                </div>
+                            </div>
+
+                            d++;
+                        }
+
+                        c++;
+                        a += 4;
+                        b += 4;
+                        d = 0;
+                        <div class="form-group answers">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name"></label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <select class="form-control has-feedback-left bg" id="@c">
+                                    <option selected>Chooise Correct Answer</option>
+                                    <option value="A">A</option>
+                                    <option value="B">B</option>
+                                    <option value="C">C</option>
+                                    <option value="D">D</option>
+                                </select>
+
+                            </div>
+                        </div>
+                    }
+
+
+                }
+                <div class="form-group">
+                    <div class="col-md-12 col-sm-12 col-xs-12 col-md-offset-3 ">
+                        <div class="col-md-3 col-sm-3 col-xs-12 form-group has-feedback">
+                        </div>
+                        <button type="button" class="btn btn-success col-md-3 col-sm-3 col-xs-3 " onclick="finishExam()">Submit</button>
+                        <div class="col-md-3 col-sm-3 col-xs-12 form-group has-feedback">
+                        </div>
+                        <div class="col-md-3 col-sm-3 col-xs-12 form-group has-feedback">
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+    function finishExam() {
+        alert("girdi");
+        var id = $("#Id").val();
+        alert(id);
+        var form = document.getElementById("demo-form2");
+        var correctAnswerElements = [];
+        correctAnswerElements = form.getElementsByClassName("answers"); //Bütün Doğru Cevapları Al
+
+        var correctAnswers = [];
+        for (let div of correctAnswerElements) {
+            var answers = div.getElementsByTagName("select")[0];
+            alert(answers);
+            correctAnswers.push(getSelectedOptionText(answers));
+        }
+        alert(correctAnswers);
+        console.log(correctAnswers);
+
+        $.ajax({
+            type: 'POST',
+            url: '/Exam/EnterExam',
+            dataType: 'json',
+            data: {
+                Id: id,
+                correctAnswers: correctAnswers,
+            },
+            success: function (response) {
+                if (response.success) {
+                    $('#1').css('background-color', response.success[0]);
+                    $('#2').css('background-color', response.success[1]);
+                    $('#3').css('background-color', response.success[2]);
+                    $('#4').css('background-color', response.success[3]);
+
+                } else {
+                    bootbox.alert("error");
+                }
+
+            },
+            error: function (response) {
+                bootbox.alert("error!");
+            }
+
+        });
+
+        function getSelectedOptionText(selectItem) {
+            var options = selectItem.getElementsByTagName("option");
+            selectedOptionText = options[selectItem.selectedIndex].innerHTML;
+            return selectedOptionText;
+        }
+    }
+</script>
+
